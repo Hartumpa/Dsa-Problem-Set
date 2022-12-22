@@ -1,7 +1,10 @@
-import java.io.*;
-import java.util.*;
+package Masai;
 
-public class Main {
+
+import java.io.*;
+        import java.util.*;
+
+public class Decipher_String {
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
@@ -128,19 +131,48 @@ public class Main {
     public static void main(String[] args)
             throws IOException
     {
-        String str = "aabbcccddd";
-        int[] counts = new int[(int) Character.MAX_VALUE];
-        // If you are certain you will only have ASCII characters, I would use `new int[256]` instead
+        Reader sr = new Reader();
+        int t= sr.nextInt();
+        while(t-- >0){
+            int n=sr.nextInt();
+            String str= sr.readLine();
+            List<Character> list= new ArrayList<>();
+            for(int i=0;i<n;i++){
+                if(Character.isLetter(str.charAt(i))){
+                    int num=0;
+                    int j=i+1;
+                    while(j<n && Character.isDigit(str.charAt(j))){
+                        num=num*10+str.charAt(j)-'0';
+                        j++;
+                    }
+                    for (int k=0;k<num;k++){
+                        list.add(str.charAt(i));
+                    }
+                    i=j-1;
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            for (char x :list){
+                sb.append(x);
+            }
+            System.out.println(sb);
 
-        for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
-            counts[(int) charAt]++;
+//            String str = "aabbcccddd";
+//            int[] counts = new int[(int) Character.MAX_VALUE];
+//            // If you are certain you will only have ASCII characters, I would use `new int[256]` instead
+//
+//            for (int i = 0; i < str.length(); i++) {
+//                char charAt = str.charAt(i);
+//                counts[(int) charAt]++;
+//            }
+//
+//            for (int i = 0; i < counts.length; i++) {
+//                if (counts[i] > 0)
+//                    //System.out.println("Number of " + (char) i + ": " + counts[i]);
+//                    System.out.print(""+ counts[i] + (char) i + "");
+//            }
         }
 
-        for (int i = 0; i < counts.length; i++) {
-            if (counts[i] > 0)
-                //System.out.println("Number of " + (char) i + ": " + counts[i]);
-                System.out.print(""+ counts[i] + (char) i + "");
-        }
+
     }
 }
