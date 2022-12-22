@@ -125,40 +125,34 @@ public class Main {
         }
     }
 
-
-
     public static void main(String[] args)
-            throws IOException {
+            throws IOException
+    {
         Reader sr = new Reader();
-        int t = sr.nextInt();
-
+        int t= sr.nextInt();
         while(t-- >0){
-            int n= sr.nextInt();
-            int dp[]= new int[n+1];
+            long n=sr.nextInt();
+            String sA= sr.readLine();
+            String sB= sr.readLine();
 
-            System.out.println(jump(dp,n));
+            char s1[]=sA.toCharArray();
+            char s2[]=sB.toCharArray();
+            long x=0,y=0;
+            for(int i=0;i<n;i++){
+                if(s1[i]=='0'){
+                    x++;
+                }
+                if(s2[i]=='0'){
+                    y++;
+                }
+            }
+            if(x!=y){
+                System.out.println("NO");
+            }else{
+                System.out.println("YES");
+            }
+
         }
-    }
-
-    public  static  int jump(int dp[],int n){
-        if(n==1){
-            return 0;
-        }
-        if(dp[n]!=0){
-            return dp[n];
-        }
-
-
-        int c1=Integer.MAX_VALUE,c2=Integer.MAX_VALUE;
-        if(n%2!=0){
-          c1=   jump(dp,n-1);
-        }else{
-           c2= jump(dp,n/2);
-        }
-        return dp[n]= Math.min(c1,c2)+1;
-
 
     }
-
-
 }
