@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Letter_Combination_Of_Phone {
     public static void mySubset(String[] key, String digits, StringBuilder val, int ind, List<String> res){
-        if(ind==digits.length()){
+        if(ind>=digits.length()){
             res.add(val.toString());
             return;
         }

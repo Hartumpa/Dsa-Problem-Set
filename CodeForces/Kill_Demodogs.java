@@ -1,7 +1,42 @@
-import java.io.*;
-import java.util.*;
+package CodeForces;
 
-public class Main {
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class Kill_Demodogs {
+
+
+    public static long solve(long n) {
+        // Create a 2D array to store the number of Demodogs at each cell
+        long[][] grid = new long[(int) n][(int) n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                grid[i][j] = (i + 1) * (j + 1);
+            }
+        }
+
+        // Create a 2D array to store the maximum number of Demodogs that can be killed starting from each cell
+        long[][] dp = new long[(int) n][(int) n];
+        // Initialize the first cell with the number of Demodogs in it
+        dp[0][0] = grid[0][0];
+        // Initialize the first row and column with the maximum number of Demodogs that can be killed starting from each cell
+        for (int i = 1; i < n; i++) {
+            dp[0][i] = dp[0][i - 1] + grid[0][i];
+            dp[i][0] = dp[i - 1][0] + grid[i][0];
+        }
+
+        // Iterate through the rest of the cells
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < n; j++) {
+                // The maximum number of Demodogs that can be killed starting from the current cell is the maximum of the number of Demodogs that can be killed starting from the cell to the left and the cell above
+                dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+            }
+        }
+
+        return dp[(int) (n - 1)][(int) (n - 1)];
+    }
+
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
@@ -130,14 +165,10 @@ public class Main {
     {
         Reader sr = new Reader();
         int t= sr.nextInt();
-        long mod= 1000000007;
         while(t-- >0){
-            long n= sr.nextLong();
-            long res=(2022*((n*(n*n-1))/3+(n*(n+1)*(2*n+1))/6))%mod;
-
-
-            System.out.println(res);
-
+            long n=sr.nextLong();
+            long ans = solve(n);
+            System.out.println((2022L * ans) % (1000000007L));
         }
 
     }
