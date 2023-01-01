@@ -133,7 +133,7 @@ public class c {
         while(t-- >0){
             long n= sr.nextLong();
 
-//            long res=(2022*((n*(n*n-1))/3+(n*(n+1)*(2*n+1))/6))%mod;
+//            long res=(2022*((n*(n*n-1))/3+(n*(n+1)*(2*n+1))/6))%mod;\
 
                long res= (long) ((2022*(4*Math.pow(n,3)+3*Math.pow(n,2) -n)/6)%mod);
 
