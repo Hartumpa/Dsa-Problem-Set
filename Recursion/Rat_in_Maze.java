@@ -1,9 +1,6 @@
 package Recursion;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Rat_in_Maze {
 
@@ -43,7 +40,7 @@ public class Rat_in_Maze {
 
     private static ArrayList<String> findPath(int[][] m,int n){
         ArrayList<String> res= new ArrayList<>();
-        int vis[][] = new int[n][n];
+        int[][] vis = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 vis[i][j] = 0;
@@ -57,14 +54,13 @@ public class Rat_in_Maze {
     }
     public static void main(String[] args) {
         int n = 4;
-        int m[][] = {{1, 0, 0, 0},
+        int[][] m = {{1, 0, 0, 0},
                     {1, 1, 0, 1},
                     {1, 1, 0, 0},
                     {0, 1, 1, 1}};
         ArrayList<String> res=findPath(m,n);
         if (res.size() > 0) {
-            for (int i = 0; i < res.size(); i++)
-                System.out.print(res.get(i) + " ");
+            for (String re : res) System.out.print(re + " ");
             System.out.println();
         } else {
             System.out.println(-1);

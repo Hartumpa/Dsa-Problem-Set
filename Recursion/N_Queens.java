@@ -31,19 +31,18 @@ public class N_Queens {
             res.add(construct(chess));
             return;
         }
-        for (int col = 0; col < chess.length; col++) {
+        for (int col = 0; col < chess.length; col++)
             if (isSafe(chess, row, col)) {
                 chess[row][col] = 'Q';
                 printQueens(row + 1, chess, res);
                 chess[row][col] = '.';
             }
-        }
     }
 
     static List<String> construct(char[][] board) {
         List<String> res = new LinkedList<String>();
-        for (int i = 0; i < board.length; i++) {
-            String s = new String(board[i]);
+        for (char[] chars : board) {
+            String s = new String(chars);
             res.add(s);
         }
         return res;

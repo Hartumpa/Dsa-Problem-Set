@@ -1,5 +1,6 @@
 package Revision;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -10,11 +11,11 @@ public class Impress_THe_Boss {
         int t= sc.nextInt();
         while (t-- >0){
             int n= sc.nextInt();
-            int arr[]=new int[n];
+            int[] arr =new int[n];
             for (int i=0;i<n;i++){
                 arr[i]= sc.nextInt();
             }
-
+            Arrays.sort(arr);
             Map<Integer,Integer> map= new HashMap<>();
             for (int x:arr){
                 map.put(x,map.getOrDefault(x,0)+1);

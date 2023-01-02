@@ -1,3 +1,5 @@
+package Masai;
+
 public class Longest_Palindromic {
 
     public static int startPoint, endPoint, max = Integer.MIN_VALUE;
