@@ -2,7 +2,7 @@ package LeetCode;
 
 public class Sudoku_Solver {
 
-    private static boolean isSafe(int r, int c,char[][] board, int val){
+    private static boolean isSafe(int r, int c,char[][] board, char val){
         for (int i=0;i<9;i++) {
             if (board[r][i] == val) {
                 return false;
