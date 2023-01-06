@@ -1,36 +1,44 @@
 import java.util.*;
 
-public class Main{
+class Main {
+    class TreeNode {
+        int data;
+        TreeNode left;
+        TreeNode right;
 
-    public static int elevator(int a,int b,int c){
+        TreeNode(int data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
 
+        public List<List<Integer>> zigzagTraversal(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) {
+                return res;
+            }
+            Queue<TreeNode> q = new LinkedList<>();
+            q.add(root);
+            boolean leftToRight = true;
+            while (!q.isEmpty()) {
+                int level = q.size();
+                List<Integer> ans = new ArrayList<>();
+                for (int i = 0; i < level; i++) {
+                    TreeNode temp = q.poll();
+                    int ind = leftToRight ? i : level - i - 1;
+                    ans.add(ind, temp.data);
 
-        int m=(a-1);
-
-
-        int d=Math.abs(b-c)+Math.abs(c-1);
-
-        if(m>d)
-            return 2;
-        if(m<d)
-            return 1;
-        else
-            return 3;
-
-    }
-
-
-    public static void main(String[] args){
-
-        Scanner sc = new Scanner(System.in);
-
-        int t=sc.nextInt();
-        while(t-- >0){
-            int a=sc.nextInt();
-            int b=sc.nextInt();
-            int c=sc.nextInt();
-
-            System.out.println(elevator(a,b,c));
+                    if (temp.left != null) {
+                        q.add(temp.left);
+                    }
+                    if (temp.right != null) {
+                        q.add(temp.right);
+                    }
+                }
+                leftToRight = !leftToRight;
+                res.add(ans);
+            }
+            return res;
         }
     }
 }
