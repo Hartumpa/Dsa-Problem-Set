@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Left_View {
 
+   
     void solve(ArrayList<Integer> ans,Node root, int level ){
         if(root==null){
             return;
