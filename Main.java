@@ -1,44 +1,50 @@
 import java.util.*;
 
 class Main {
-    class TreeNode {
-        int data;
-        TreeNode left;
-        TreeNode right;
 
-        TreeNode(int data) {
-            this.data = data;
-            this.left = null;
-            this.right = null;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int nums[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+        StringBuilder sb = new StringBuilder();
+        Stack<Integer> stack = new Stack<>();
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && nums[i] > stack.peek()) {
+                stack.pop();
+            }
+
+            if (!stack.isEmpty()) {
+                set.add(stack.peek() - nums[i]);
+            }
+
+            stack.push(nums[i]);
         }
 
-        public List<List<Integer>> zigzagTraversal(TreeNode root) {
-            List<List<Integer>> res = new ArrayList<>();
-            if (root == null) {
-                return res;
-            }
-            Queue<TreeNode> q = new LinkedList<>();
-            q.add(root);
-            boolean leftToRight = true;
-            while (!q.isEmpty()) {
-                int level = q.size();
-                List<Integer> ans = new ArrayList<>();
-                for (int i = 0; i < level; i++) {
-                    TreeNode temp = q.poll();
-                    int ind = leftToRight ? i : level - i - 1;
-                    ans.add(ind, temp.data);
-
-                    if (temp.left != null) {
-                        q.add(temp.left);
-                    }
-                    if (temp.right != null) {
-                        q.add(temp.right);
-                    }
-                }
-                leftToRight = !leftToRight;
-                res.add(ans);
-            }
-            return res;
+        while (!stack.isEmpty()) {
+            stack.pop();
         }
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && nums[i] > stack.peek()) {
+                stack.pop();
+            }
+
+            if (!stack.isEmpty()) {
+                set.add(stack.peek() - nums[i]);
+            }
+
+            stack.push(nums[i]);
+        }
+
+        sb.append(set.size()).append("\n");
+        System.out.print(sb);
     }
+
+
 }
