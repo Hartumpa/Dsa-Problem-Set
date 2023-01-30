@@ -1,66 +1,39 @@
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-
-
-    public static int solve(int ind, int target, int arr[]){
-
-        if(ind==0){
-            if(target % arr[0]==0){
-                return target/arr[0];
+    static boolean printCombination(int[] arr, int n, int k, int s, List<Integer> combination) {
+        if (k == 0) {
+            if (s == 0) {
+                System.out.println(combination);
+                return true;
             }
-            else{
-                return (int)Math.pow(10,9);
-            }
+            return false;
         }
 
-        int notPick=0+solve(ind-1,target,arr);
-        int pick=(int)Math.pow(10,9);
-        if(arr[ind]<=target)
-            pick=1+solve(ind,target-arr[ind],arr);
-        return Math.min(pick,notPick);
+        if (n == 0 || s < 0) {
+            return false;
+        }
+
+        boolean found = false;
+        combination.add(arr[n - 1]);
+        found = printCombination(arr, n - 1, k - 1, s - arr[n - 1], combination);
+        combination.remove(combination.size() - 1);
+        found = found || printCombination(arr, n - 1, k, s, combination);
+
+        return found;
     }
-
-    public static int coinChange(int[] coins, int amount) {
-        int n=coins.length;
-        int ans= solve(n-1,amount,coins);
-        if(ans >= (int)Math.pow(10,9)) return -1;
-        return ans;
-    }
-
-//    public static int solve(int k,int dp[]) {
-//        if (k == 0) {
-//            return 1;
-//        }
-//        if (k < 0) {
-//            return (int)(1e6);
-//        }
-//        if(dp[k]!=-1){
-//            return dp[k];
-//        }
-//        int pick10 =1+solve(k - 10,dp);
-//        int pick12 =1+solve(k - 12,dp);
-//
-//        return dp[k]= Math.min(pick10 ,pick12);
-//    }
-
 
     public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int n = arr.length;
+        int k = 3;
+        int s = 18;
 
-        Scanner sc = new Scanner(System.in);
-
-        int tc = sc.nextInt();
-
-        for (int t = 0; t < tc; t++) {
-
-            int n = sc.nextInt();
-            int arr[]={10,12};
-
-            System.out.println(coinChange(arr,n));
-
+        List<Integer> combination = new ArrayList<>();
+        boolean found = printCombination(arr, n, k, s, combination);
+        if (!found) {
+            System.out.println(-1);
         }
     }
-
-
 }
